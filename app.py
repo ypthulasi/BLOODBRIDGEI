@@ -219,28 +219,29 @@ if st.button("Search Donors"):
         )
 #Recipient Blood Request
 
-with tab4:
+with tab3:
     st.header("🩸 Recipient Blood Request")
     st.write("Submit a request if you need blood.")
 
 
    # Find donors with the selected blood group
+donors = st.session_state.donors
 
-    matching_donors = [
-        donor for donor in donors
-      if donor["Blood Group"] == required_group
+matching_donors = [
+    donor for donor in donors
+    if donor["Blood Group"] == required_group
 ]
-      
-    if matching_donors:
-        st.success(f"Found {len(matching_donors)} matching donor(s)!")
-        st.dataframe(
-            pd.DataFrame(matching_donors),
-            use_container_width=True
-        )
-    else:
-        st.warning(
-            f"No registered demo donors found with blood group {required_group}."
-        )
+
+if matching_donors:
+    st.success(f"Found {len(matching_donors)} matching donor(s)!")
+    st.dataframe(
+        pd.DataFrame(matching_donors),
+        use_container_width=True
+    )
+else:
+    st.warning(
+        f"No registered demo donors found with blood group {required_group}."
+    )
         
 #Recipient Blood Request
 
